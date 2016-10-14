@@ -19,8 +19,8 @@ from . import views
 from rest_framework.authtoken import views as authviews
 
 urlpatterns = [
-   url(r'^subjects/([b,m,p]_[A-Z]{3}_[0-8]_[0-9]{2})/assignments/upload/(.{1,200})/$',views.handle_upload_assignment),
-   url(r'^subjects/([b,m,p]_[A-Z]{3}_[0-8]_[0-9]{2})/notes/upload/(.{1,200})/$',views.handle_upload_notes),
+   url(r'^subjects/([b,m,p]_[A-Z]{3}_[0-8]_[0-9]{2})/assignments/upload/(.{1,100})/$',views.handle_upload_assignment),
+   url(r'^subjects/([b,m,p]_[A-Z]{3}_[0-8]_[0-9]{2})/notes/upload/(.{1,100})/$',views.handle_upload_notes),
    url(r'^subjects/([b,m,p]_\w*)/assignments/$',views.get_assigns),
    url(r'^subjects/([b,m,p]_\w*)/$',views.get_subs_of_sem),
    url(r'^subjects/([b,m,p]_\w*)/notes/$',views.get_notes),

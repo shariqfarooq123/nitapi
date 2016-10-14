@@ -19,7 +19,7 @@ class Subject(models.Model):
         return self.name
         
 class Assignment(models.Model):
-    name = models.CharField(max_length=30)
+    name = models.CharField(max_length=100)
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE, default=0)
     assignment_id = models.CharField(max_length=30, unique=True)
     drive_file_id = models.CharField(max_length=100)
@@ -30,7 +30,7 @@ class Assignment(models.Model):
 
 
 class Notes(models.Model):
-    name = models.CharField(max_length=30)
+    name = models.CharField(max_length=100)
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE, default=0)
     note_id = models.CharField(max_length=30, unique=True)
     drive_file_id = models.CharField(max_length=100)
