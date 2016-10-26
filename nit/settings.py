@@ -40,8 +40,10 @@ INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     'testapp',
+    'testapp.templatetags',
     'rest_framework',
-    'rest_framework.authtoken'
+    'rest_framework.authtoken',
+    
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -61,7 +63,7 @@ ROOT_URLCONF = 'nit.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(PROJECT_ROOT,'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

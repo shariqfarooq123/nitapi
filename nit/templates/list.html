@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+{% load template_filters %}
+{% block head_title %}
+eResources | {{block.super}}
+{% endblock %}
+
+{% block body %}
+
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <h1 class="navbar-brand">{{title}}</h1>
+        </div>
+        
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
+           <form method="POST" class="navbar-form navbar-right">{% csrf_token %}
+               <div class="form-group">
+                   <select class="form-control" name="course" required>
+                       <option value="" disabled selected>Course</option>
+                       <option value="b">Btech</option>
+                       <option value="m">Mtech</option>
+                   </select>
+                   <select class="form-control" name="branch" required>
+                       <option value="" disabled selected>Branch</option>
+                       <option value="CSE">CSE</option>
+                       <option value="ITE">IT</option>
+                       <option value="ECE">ECE</option>
+                       <option value="ELE">ELE</option>
+                       <option value="CIV">CIV</option>
+                       <option value="MEC">MECH</option>
+                       <option value="CHM">CHEM</option>
+                       <option value="MET">MET</option>
+                   </select>
+                   <select class="form-control" name="sem" required>
+                       <option value="" disabled selected>Semester</option>
+                       <option>1</option>
+                       <option>2</option>
+                       <option>3</option>
+                       <option>4</option>
+                       <option>5</option>
+                       <option>6</option>
+                       <option>7</option>
+                       <option>8</option>
+                   </select>
+               </div>
+               <button type="submit" class="btn btn-default">Submit</button>
+           </form>
+        </div>
+    </div>
+</nav>
+<div class="panel-group">
+    {% for obj in obj_list %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-tile">
+                <a data-toggle="collapse" href={{obj.id|pre_attach:"#"}}> {{obj.name}} </a>
+            </h4>
+        </div>
+        <div id={{obj.id}} class="panel-collapse collapse">
+            <div class="panel-body">
+                <div class="panel-group">
+                    <div class="panel panel-default">
+                            <h4 class="panel-tile">
+                                <a data-toggle="collapse" href={{obj.id|pre_attach:"#notes"}}>Notes</a>
+                            </h4>
+                            <div class="collapse panel-collapse" id={{obj.id|pre_attach:"notes"}}>
+                                <div class="panel-body">
+                                    
+                                    <div class="list-group">
+                                        {% for note in obj.notes_set %}
+                                         <a href={{note.drive_file_id|filter_drive_url}} class="list-group-item ">
+                                            <h4 class="list-group-item-heading">{{note.name}}</h1>
+                                            <p class="list-group-item-text">{{note.subject}}</p>
+                                        </a>
+                                        {% endfor %}
+                                    </div>
+                                    
+                                    
+                                    
+                                </div>
+                            </div>
+                    </div>
+                     <div class="panel panel-default">
+                            <h4 class="panel-tile">
+                                <a data-toggle="collapse" href={{obj.id|pre_attach:"#assignments"}}>Assignments</a>
+                            </h4>
+                            <div class="collapse panel-collapse" id={{obj.id|pre_attach:"assignments"}}>
+                                <div class="panel-body">
+                                    
+                                    <div class="list-group">
+                                        {% for assignment in obj.assignment_set %}
+                                         <a href={{assignment.drive_file_id|filter_drive_url}} class="list-group-item ">
+                                            <h4 class="list-group-item-heading">{{assignment.name}}</h1>
+                                            <p class="list-group-item-text">{{assignment.subject}}</p>
+                                        </a>
+                                        {% endfor %}
+                                    </div>
+                                
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

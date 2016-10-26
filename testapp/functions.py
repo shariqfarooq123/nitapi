@@ -6,6 +6,9 @@ from .models import Credentials, Assignment, Subject, Notes
 from django.core import serializers
 from . import myserializers
 
+
+
+
 def get_authenticated_gauth():
     gauth = GoogleAuth()
     # Get creds from database and save to file
@@ -53,9 +56,20 @@ def get_subjects_of_sem(sem_id):
     data = myserializers.SubjectSerializer(queryset,many=True)
     return data.data
 
+def get_subjects_lite_of_sem(sem_id):
+    queryset = Subject.objects.filter(subject_id__regex=r'^'+sem_id)
+    #data = serializers.serialize('json',Subject.objects.filter(subject_id__regex=r'^'+sem_id))
+    data = myserializers.SubjectSerializerLite(queryset,many=True)
+    return data.data
+
 def get_notes_of_subject(sub_id):
     query = Notes.objects.filter(note_id__regex=r'^n_'+sub_id)
     #data = serializers.serialize('json',Notes.objects.filter(note_id__regex=r'^n_'+sub_id))
     data = myserializers.NotesSerializer(query,many=True)
     return data.data
+    
+def get_drive_url(file_id):
+    return "http://drive.google.com/file/d/"+file_id
+    
+    
     

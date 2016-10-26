@@ -9,6 +9,7 @@ from rest_framework.decorators import api_view , permission_classes , authentica
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 import json
+from django.shortcuts import render
 
 # Create your views here.
 @csrf_exempt
@@ -78,8 +79,10 @@ def get_subs_of_sem(request,sem_id):
 @renderer_classes((JSONRenderer,))
 def get_notes(request,sub_id):
     return Response(functions.get_notes_of_subject(sub_id))
-
     
+
+
+
     
     
     

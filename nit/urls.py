@@ -21,4 +21,6 @@ urlpatterns = [
     url(r'^news/', include('news.urls')),
     url(r'^account/', include('account.urls')),
     url(r'^test/', include('testapp.urls')),
+    url(r'^eResources/', include('eresources.urls')),
+    
 ]

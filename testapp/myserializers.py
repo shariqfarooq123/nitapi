@@ -19,3 +19,11 @@ class SubjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Subject
         fields = '__all__'
+        
+        
+class SubjectSerializerLite(serializers.ModelSerializer):
+    assignment_set = AssignmentSerializer(many=True,read_only=True)
+    notes_set = NotesSerializer(many=True,read_only=True)
+    class Meta:
+        model = Subject
+        fields = ('id','name','assignment_set','notes_set')
